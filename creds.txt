@@ -1,0 +1,29 @@
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+import requests
+import json
+import pprint
+
+import pandas as pd
+pd.set_option('display.max_columns', 999)
+pd.set_option('display.max_rows', 90)
+
+%config InlineBackend.figure_format = 'retina'
+%matplotlib inline
+%load_ext autoreload
+%autoreload 2
+
+client_credentials_manager = SpotifyClientCredentials(client_id='472d9fe420af4222b7afdd11b9578446', client_secret='518bc9207d064855be7f6300ca080c76')
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+def get_auth():
+    CLIENT_ID ='472d9fe420af4222b7afdd11b9578446'
+    CLIENT_SECRET = '518bc9207d064855be7f6300ca080c76'
+
+    credentials = SpotifyClientCredentials(
+            client_id=CLIENT_ID,
+            client_secret=CLIENT_SECRET)
+
+    token = credentials.get_access_token()
+    return "Bearer " + token
