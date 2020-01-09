@@ -6,6 +6,8 @@ import pydotplus
 from sklearn.externals.six import StringIO
 from IPython.display import Image  
 
+from imblearn.over_sampling import SMOTE
+
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
@@ -20,6 +22,10 @@ def XySplit(df):
     y = df['Default']
     X = df.drop(columns=['Default'], axis=1)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state=123)
+
+
+    sm = SMOTE(random_state = 123, sampling_strategy = 1.0)
+    X_train,y_train  = sm.fit_sample(X_train, y_train)
     
     scale = StandardScaler()
     scale.fit(X_train)
