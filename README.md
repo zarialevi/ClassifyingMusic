@@ -1,6 +1,12 @@
+Title
+Zaria Rankine
+ 
+Documents
+
+
 Project Scope
 
-Music streaming services have revolutionised how we connsume music
+Music streaming services have revolutionised how we consume music
 Numerous perks, lack of ownership
 Lack of control of how this music is organised
 
@@ -21,10 +27,14 @@ Results
 
 Data Sources
 
-Spotify API
-LastFM API
+Spotify API provides access to
 
 Model Selection
+
+Data requires classifier, not network
+Built multiple models
+
+Reccomendation
 
 
 Conclusion
