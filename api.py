@@ -31,8 +31,6 @@ def get_auth():
 def get_tracks_from_playlist(lst):
     df_list=[]
     for playlist in lst:
-    
-
         r = requests.get(
         f"https://api.spotify.com/v1/playlists/{playlist}/tracks",
         headers={ "Accept": "application/json", "Content-Type": "application/json", "Authorization": get_auth()})
@@ -40,18 +38,20 @@ def get_tracks_from_playlist(lst):
         
         data = dat['items']
         tracks_list=[]
-
+                
         for i in range(0,len(data)):
-           
-            tracks_list.append({
-                "track_name" : data[i]['track']['name'], 
-                "artist" : data[i]['track']['artists'][0]['name'],
-                "album" : data[i]['track']['album']['name'], 
-                "release_date" : data[i]['track']['album']['release_date'],
-                "explicit" : data[i]['track']['explicit'], 
-                "track_id" : data[i]['track']['id'],
-                "track_uri" : data[i]['track']['uri']
-            })
+            if data[i]['track'] == None:
+                continue
+            else:
+                tracks_list.append({
+                    "track_name" : data[i]['track']['name'], 
+                    "artist" : data[i]['track']['artists'][0]['name'],
+                    "album" : data[i]['track']['album']['name'], 
+                    "release_date" : data[i]['track']['album']['release_date'],
+                    "explicit" : data[i]['track']['explicit'], 
+                    "track_id" : data[i]['track']['id'],
+                    "track_uri" : data[i]['track']['uri']
+                })
         
         df_list.append(pd.DataFrame(tracks_list))
         
