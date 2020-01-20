@@ -60,6 +60,36 @@ def get_tracks_from_playlist(lst):
     tracks_df.drop('index', axis = 1, inplace=True)
     return tracks_df
 
+
+
+def get_related_artists(df):
+    data = []
+
+    for id in df['artist_id']:
+        r = requests.get(f"https://api.spotify.com/v1/artists/{id}/related-artists", 
+                     headers={ "Accept": "application/json", 
+                              "Content-Type": "application/json", 
+                              "Authorization": get_auth()
+                             })
+
+        resp =r.json()
+
+        data.append(resp)
+
+    full = []
+
+    for x in range(len(data)):
+        for y in range(len(data[x]['artists'])-10):
+            full.append({
+                'artist_name': data[x]['artists'][y]['name'], 
+                'artist_uri': data[x]['artists'][y]['uri'],
+                'artist_id': data[x]['artists'][y]['id']})
+
+    df = pd.DataFrame(full)
+    return df
+
+
+
 def get_playlists():
     r = requests.get("https://api.spotify.com/v1/users/loliblews/playlists",
                      headers={ "Accept": "application/json", "Content-Type": "application/json", "Authorization": get_auth()})
@@ -73,11 +103,37 @@ def get_playlists():
     return playlists
 
 
+def get_tracks_from_artist(lst):
+    
+    track = []
+    for artist in lst:
+        r = requests.get(f"https://api.spotify.com/v1/artists/{artist}/top-tracks?country=US",
+                     headers={ "Accept": "application/json", "Content-Type": "application/json", "Authorization": 
+                              get_auth()})
+
+        dat =r.json()
+        
+        data = dat['tracks']
+
+        for x in range(len(data)-8):
+            if data[x] == None:
+                continue
+            else:
+                track.append({
+                    'track_id' : data[x]['id'],
+                    'track_name' : data[x]['name'],
+                    'track_uri' : data[x]['uri'],
+                    'artist_name': data[x]['album']['name']
+                        })
+
+    datas = pd.DataFrame(track)
+    return datas
+
 def get_feats(df):
 
     feats = []
 
-    for x in df.index:
+    for x in range(len(df.index)):
         dat = sp.audio_features(tracks = df.track_id[x])
         data = dat[0]
         
@@ -125,6 +181,7 @@ def get_artists_uri(lst):
         data =r.json()
 
         full.append(data)
+
     
     success = []
 
@@ -132,11 +189,12 @@ def get_artists_uri(lst):
     for x in range(len(lst)):
         if (len(full[x]['artists']['items']) > 0):
             success.append({
-                'name': full[x]['artists']['items'][0]['name'], 
-                'uri': full[x]['artists']['items'][0]['uri']})
+                'artist_name': full[x]['artists']['items'][0]['name'], 
+                'artist_uri': full[x]['artists']['items'][0]['uri'],
+            'artist_id': full[x]['artists']['items'][0]['id']})
     
-    for x in range(len(success)):
-        success[x]['uri'] = success[x]['uri'][-22:] 
+#     for x in range(len(success)):
+#         success[x]['uri'] = success[x]['uri'][-22:] 
         
     df = pd.DataFrame(success)
     return df
