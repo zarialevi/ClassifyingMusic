@@ -1,7 +1,6 @@
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
-from sklearn.externals import joblib
 from sklearn.linear_model import LogisticRegression
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn import tree
@@ -10,6 +9,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import make_scorer, f1_score, roc_curve, auc, accuracy_score, roc_auc_score
 from xgboost.sklearn import XGBClassifier
+
+import joblib 
 
 from yellowbrick.classifier import ROCAUC
 from yellowbrick.datasets import load_game
@@ -98,7 +99,7 @@ param_grid_gb = {'gb__n_estimators':[100,200,300,400],
 
 def base_model(X_train, y_train,X_test, y_test):
     model = LogisticRegression(multi_class='auto',solver='lbfgs')
-    visualizer = ROCAUC(model, classes=['dancehall','reggae','soca'])
+    visualizer = ROCAUC(model, classes=['dancehall','reggae','soca','pop'])
 
     visualizer.fit(X_train, y_train)
     visualizer.score(X_test, y_test)
@@ -134,7 +135,7 @@ def best_pipe(pipes, pipe_dict):
     return best_pipe
 
 def best_model(model):
-    visualizer = ROCAUC(model, classes=['reggae','soca','dancehall'])
+    visualizer = ROCAUC(model, classes=['reggae','soca','dancehall','pop'])
     visualizer.fit(X_train, y_train)
     visualizer.score(X_test, y_test)
     visualizer.show() 
