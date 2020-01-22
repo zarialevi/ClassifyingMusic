@@ -17,8 +17,8 @@ client_credentials_manager = SpotifyClientCredentials(client_id='472d9fe420af422
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 def get_auth():
-    CLIENT_ID ='472d9fe420af4222b7afdd11b9578446'
-    CLIENT_SECRET = '518bc9207d064855be7f6300ca080c76'
+    CLIENT_ID ='56c07bdf511c431887afb3de84707f5f'
+    CLIENT_SECRET = '91870195b1594d74b49cdd5f894da01a'
 
     credentials = SpotifyClientCredentials(
             client_id=CLIENT_ID,

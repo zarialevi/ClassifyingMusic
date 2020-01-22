@@ -13,7 +13,11 @@ Non-Western genres feel this the most
 Chose reggae, for domain and large data selection, but also apppicable to rising number of distinct genres in UK music scene.
 
 
-Repo Files
+Repository Files / Key Files
+- Data
+- Models
+- 
+
 
 Procedure and Project Overview
 
@@ -27,32 +31,26 @@ Results
 
 Data
 
-Data Sources : https://developer.spotify.com/ https://www.riddimguide.com/
+<!-- Data Sources : https://developer.spotify.com/ https://www.riddimguide.com/ https://www.apple.com/uk/music/ https://www.last.fm/
+ -->
+For this project, the dataset was collated from playlists that were correctly labelled with their sub-genre. These songs were then searched on the Spotify API, and their audio features were recorded. 
+Spotify API provides access to information about tracks, such as their popularity and release date, as well as user information, such as a user's featured playlists.  The API also provides audio features such as * , which give characteristics of a track, and pitch and timbre information. More information can be found *. 
 
-All data was collected from the Spotify Web API. 
-Spotify API provides access to information about tracks, such as *, as well as user information, such as *. 
-The API also provides audio features such as * .
+A selection of music that would not be in my target genre was also collected, to allow for distinction between my target categories (music we can categorise), and that we cannot. 
 
-For this project, the dataset was built from playlists that were correctly labelled with their sub-genre,
-Riddim Guide was an essential resource for this.
+As mentioned, the dependant variable being predicted was the sub-genre. These were given the labels:
 
-I also incuded a selection of music that would not be in my target genre, to allow for distinction between my target categories, as well as between music we can categorise, and that we cannot. 
-
-As mentioned, the dependant variable being predicted was the sub-genre, given the labels:
-
-# 0 = dancehall
-# 1 = reggae
-# 2 = soca
-# 3 = Pop
-
-
+0 = dancehall
+1 = reggae
+2 = soca
+3 = Pop
 
 
 Model Selection
 
-Given that a relatively small amount of data was available with the correct label, it seemed appropriate to build a classifiction model instea of a network, where some work has been done previously. *?* 
+Given that a relatively small amount of data was available with the correct label, it seemed appropriate to build a classifiction model. 
 
-A pipeline was created to build and optimise multiple models in unison. This process found the best model was *.
+A selection of models were built:
 
 Logistic Regression
 K-Nearest Neighbors
@@ -61,11 +59,16 @@ Random Forrest Classifier
 AdaBoost Classifier
 Gradient Boost Classifier
 eXtreme Gradient Boost Classifier
-<!-- Support Vector Machine -->
+
+A pipeline was created to build and optimise multiple models in unison. 
+
+It was found that building two models led to best model accuracy. First a binary classifier was trained on the entire dataset, to distinguish between our target genres and all other genres (labelled pop, for ease of distinction). The tracks that are classified as one of our target genres are then classified into their subgenre. 
+
+This process found the bests model were *.
 
 Results
 
-For each sub-genre, accuracy and AUC
+For each sub-genre, accuracy and AUC were *, showing profficient 
 
 * Spotify Play Button*
 
@@ -84,8 +87,5 @@ Reccomendation
 
 
 Next Steps
-
-More data
-
-Different genres
+This process could easily be replicated with another genre and sub-genres. 
 
