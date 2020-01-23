@@ -2,15 +2,19 @@ Classifying Music by Sub-Genre
  
 # Project Scope
 For this project, a classification system was built to identify and arrange music by sub-genre.
-Currently, Spotify has functionality to do ....
-Allowing for more flexibility in how music is stred will ...
-Music streaming services have revolutionised how we consume music
-The services come with numerous perks, most notably instantaneuos access to music, without having to have it stored on your device. 
-However this problem comes at a price: the lack of ownership of music. 
-Lack of control of how this music is organised
-Music is often generealise into wider genres, for ease of access and storage. These immutable labels, pre-determined by Spotify, can range from spookily accurate 
-Non-Western genres feel this the most
-Chose reggae, for domain and large data selection, but also apppicable to rising number of distinct genres in UK music scene.
+
+Currently, Spotify has great functionality to recommend songs to its users. You can 
+
+Music streaming services have revolutionised how we consume music. The services come with numerous perks, most notably instantaneuos access to music, without having to have it stored on your device.
+
+
+
+However this problem comes at a price, we increasingly own less and less of the music we listen to. For most, this may not be a problem, but the lack of control of how this music is organised
+
+Music is often generealise into wider genres, for ease of access and storage. These immutable labels, pre-determined by Spotify,   
+Non-Western genres feel this the most, and are often over-generalised
+
+Reggae was chosen as my parent genre, and I identified three sub-genres which the data will be split between. This genre was chosen because of a good domain knowledge on my part, and because a large dataset could be collated, although this process could easily be replicated with another parent genre and sub-genres.
 
 
 # Repository Files
@@ -63,7 +67,7 @@ eXtreme Gradient Boost Classifier
 
 A pipeline was created to build and optimise multiple models in unison. 
 
-This process found the bests model were *.
+This process found the best model was the XGBoost Classifier.
 
 # Results
 
@@ -78,6 +82,6 @@ Visuals
 What do genres have in common?
 
 
-Next Steps
+# Next Steps
 This process could easily be replicated with another genre and sub-genres, especially given the amount of data available through spotify. It can be challenging to find enough labelled data to train the model on, but
 
